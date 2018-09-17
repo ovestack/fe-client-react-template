@@ -22,12 +22,13 @@ if (process.env.NODE_ENV === 'development') {
 // __INITIAL_STATE__
 export default function configureStore(initialState) {
     const store = createStore(
-        combineReducers.apply(combineReducers, [Object.assign({
+        combineReducers(Object.assign({
             routing: routerReducer
-        })].concat(getReducers())),
+        }, ...getReducers())),
         initialState,
         applyMiddleware.apply(null,middleware)
     )
+
 
     // if(module.hot) {
     //     // Enable Webpack hot module replacement for reducers
@@ -40,7 +41,7 @@ export default function configureStore(initialState) {
     return store
 }
 
-export function getReducers() {
+function getReducers() {
     var resolvers = require.context('./', true, /\/index\.js$/)
     var modules = []
     resolvers.keys().forEach(function(r) {
@@ -51,7 +52,6 @@ export function getReducers() {
         }
         modules.push(mod)
     })
-    console.log(modules)
     return modules
 }
 

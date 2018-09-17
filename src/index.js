@@ -8,7 +8,7 @@ import {
     Router
 } from 'react-router'
 import './index.css'
-import registerServiceWorker from './registerServiceWorker'
+// import registerServiceWorker from './registerServiceWorker'
 import routes from './routes'
 import store from './redux'
 
@@ -18,4 +18,4 @@ ReactDOM.render(
     </Provider>,
     document.getElementById('root')
 )
-registerServiceWorker()
+// registerServiceWorker()

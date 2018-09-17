@@ -1,0 +1,3 @@
+__DEPEND__
+
+export default __ROUTE_CONF__

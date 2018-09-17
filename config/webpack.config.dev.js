@@ -120,6 +120,9 @@ module.exports = {
             },
             loader: require.resolve('eslint-loader'),
           },
+          {
+              loader: path.join(__dirname, '../scripts/router.js')
+          }
         ],
         include: paths.appSrc,
       },

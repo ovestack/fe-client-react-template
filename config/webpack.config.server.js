@@ -34,7 +34,11 @@ module.exports = {
             {
                 test: /\.js$/,
                 exclude: /node_modules/,
-                loader: 'babel-loader?presets[]=react'
+                use: [{
+                    loader: 'babel-loader?presets[]=react'
+                }, {
+                    loader: path.join(__dirname, '../scripts/router.js')
+                }]
             },
             {
                 test: /\.(css|less)$/,
