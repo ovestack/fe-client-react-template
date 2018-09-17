@@ -10,9 +10,10 @@ import {
 import './index.css'
 import registerServiceWorker from './registerServiceWorker'
 import routes from './routes'
+import store from './redux'
 
 ReactDOM.render(
-    <Provider store={store}>
+    <Provider store={store(window.__INITIAL_STATE__ || {})}>
         <Router history={browserHistory} routes={routes} />
     </Provider>,
     document.getElementById('root')

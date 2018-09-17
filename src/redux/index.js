@@ -3,7 +3,9 @@ import {
     applyMiddleware
 } from 'redux'
 import thunkMiddleware from 'redux-thunk'
-import createLogger from 'redux-logger'
+import {
+    createLogger
+} from 'redux-logger'
 import {
     combineReducers
 } from 'redux'
@@ -27,18 +29,18 @@ export default function configureStore(initialState) {
         applyMiddleware.apply(null,middleware)
     )
 
-    if(module.hot) {
-        // Enable Webpack hot module replacement for reducers
-        module.hot.accept('../reducers', () => {
-            const nextRootReducer = require('../reducers').default
-            store.replaceReducer(nextRootReducer)
-        })
-    }
+    // if(module.hot) {
+    //     // Enable Webpack hot module replacement for reducers
+    //     module.hot.accept('../reducers', () => {
+    //         const nextRootReducer = require('../reducers').default
+    //         store.replaceReducer(nextRootReducer)
+    //     })
+    // }
 
     return store
 }
 
-function getReducers() {
+export function getReducers() {
     var resolvers = require.context('./', true, /\/index\.js$/)
     var modules = []
     resolvers.keys().forEach(function(r) {
