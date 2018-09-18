@@ -1,6 +1,7 @@
 {
-  "name": "react-starter",
-  "version": "1.0.0",
+  "name": "{{name}}",
+  "version": "{{version}}",
+  "description": "{{description}}",
   "private": true,
   "dependencies": {
     "autoprefixer": "7.1.6",
