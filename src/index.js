@@ -11,6 +11,7 @@ import './index.css'
 // import registerServiceWorker from './registerServiceWorker'
 import routes from './routes'
 import store from './redux'
+import './index.css'
 
 ReactDOM.render(
     <Provider store={store(window.__INITIAL_STATE__ || {})}>
@@ -18,4 +19,6 @@ ReactDOM.render(
     </Provider>,
     document.getElementById('root')
 )
+
+// FIXME: 
 // registerServiceWorker()

@@ -1,12 +1,16 @@
+export var ACTIONS = {
+    LOADING: 'TEST:LOADING',
+    GET: 'TEST:FETCH_ARTICLE'
+}
 var fetching = function() {
     return {
-        type: 'GETING_ARTICLE'
+        type: ACTIONS.LOADING
     }
 }
 
 var fetchArticle = function(articles) {
     return {
-        type: 'FETCH_ARTICLE',
+        type: ACTIONS.GET,
         articles
     }
 }
@@ -14,8 +18,11 @@ var fetchArticle = function(articles) {
 export function getAritcle() {
     return function(dispatch) {
         dispatch(fetching())
-        setTimeout(function() {
-            dispatch(fetchArticle([1,2,3,4]))
-        }, 2000)
+        return new Promise((resolve, reject) => {
+            setTimeout(function () {
+                dispatch(fetchArticle([1, 2, 3, 4]))
+                resolve()
+            }, 200)
+        })
     }
 }

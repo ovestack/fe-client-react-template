@@ -19,7 +19,6 @@ if (process.env.NODE_ENV === 'development') {
     middleware.push(createLogger())
 }
 
-// __INITIAL_STATE__
 export default function configureStore(initialState) {
     const store = createStore(
         combineReducers(Object.assign({
@@ -29,7 +28,7 @@ export default function configureStore(initialState) {
         applyMiddleware.apply(null,middleware)
     )
 
-
+    // FIXME: add hot module reload for redux
     // if(module.hot) {
     //     // Enable Webpack hot module replacement for reducers
     //     module.hot.accept('../reducers', () => {
@@ -53,11 +52,4 @@ function getReducers() {
         modules.push(mod)
     })
     return modules
-}
-
-function Camelize(prop){
-    prop = prop.replace('./', '').replace('/index.js', '')
-	return prop.replace(/\/([a-z])/ig,function(all,letter){
-        return letter.toUpperCase()
-    })
 }

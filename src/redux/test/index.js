@@ -1,19 +1,24 @@
+import {
+    ACTIONS
+} from './action'
+
 function articles(state = {
     articles: [],
     fetching: false
 }, action) {
     switch (action.type) {
-        case 'GETING_ARTICLE':
+        case ACTIONS.LOADING:
             return Object.assign({}, state, {
                 fetching: true
             })
-        case 'FETCH_ARTICLE':
+        case ACTIONS.GET:
             return Object.assign({}, state, {
                 fetching: false,
                 articles: action.articles
             })
+        default:
+            return state
     }
-    return state
 }
 
 export default {

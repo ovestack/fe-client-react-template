@@ -1,14 +1,15 @@
+process.env.NODE_ENV='production'
+
 var fs = require('fs')
 var path = require('path')
 var paths = require('./paths')
-
-process.env.NODE_ENV = 'development'
+const webpack = require('webpack');
 
 module.exports = {
     entry: path.resolve(__dirname, '../src/index.server.js'),
 
     output: {
-        path: path.resolve(__dirname, '../../sso-client/services/ssr/dist'),
+        path: path.resolve(__dirname, '../../ssr/services/ssr/dist'),
         filename: 'server.bundle.js',
         libraryTarget: 'commonjs2'
     },
@@ -58,5 +59,11 @@ module.exports = {
                 }
             }
         ]
-    }
+    },
+
+    plugins: [
+        new webpack.DefinePlugin({
+            __SERVER__: JSON.stringify(true)
+        })
+    ]
 }
