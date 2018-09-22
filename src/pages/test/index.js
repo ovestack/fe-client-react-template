@@ -10,12 +10,12 @@ import {
     getAritcle
 } from '../../redux/test/action'
 class Test extends Component {
-    static fetchData(state, dispatch) {
+    static fetchData(props, {dispatch} = props) {
         return dispatch(getAritcle())
     }
     componentDidMount() {
         if (!this.props.articles.length) {
-            Test.fetchData(this.props.state, this.props.dispatch)
+            Test.fetchData(this.props)
         }
     }
     render() {
