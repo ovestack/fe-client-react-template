@@ -1,25 +1,26 @@
 import {
+    handleActions
+} from 'redux-actions'
+import {
     ACTIONS
 } from './action'
 
-function articles(state = {
+var articles = handleActions({
+    [ACTIONS.LOADING]: (state, action) => {
+        return Object.assign({}, state, {
+            fetching: true
+        })
+    },
+    [ACTIONS.GET]: (state, action) => {
+        return Object.assign({}, state, {
+            fetching: false,
+            articles: action.payload.articles
+        })
+    }
+}, {
     articles: [],
     fetching: false
-}, action) {
-    switch (action.type) {
-        case ACTIONS.LOADING:
-            return Object.assign({}, state, {
-                fetching: true
-            })
-        case ACTIONS.GET:
-            return Object.assign({}, state, {
-                fetching: false,
-                articles: action.articles
-            })
-        default:
-            return state
-    }
-}
+})
 
 export default {
     'test/articles': articles

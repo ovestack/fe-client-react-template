@@ -1,19 +1,17 @@
+import {
+    createAction
+} from 'redux-actions'
 export var ACTIONS = {
     LOADING: 'TEST:LOADING',
     GET: 'TEST:FETCH_ARTICLE'
 }
-var fetching = function() {
-    return {
-        type: ACTIONS.LOADING
-    }
-}
+var fetching = createAction(ACTIONS.LOADING)
 
-var fetchArticle = function(articles) {
+var fetchArticle = createAction(ACTIONS.GET, articles => {
     return {
-        type: ACTIONS.GET,
         articles
     }
-}
+})
 
 export function getAritcle() {
     return function(dispatch) {
