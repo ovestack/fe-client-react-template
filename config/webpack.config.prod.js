@@ -188,6 +188,8 @@ module.exports = {
                         importLoaders: 1,
                         minimize: true,
                         sourceMap: shouldUseSourceMap,
+                        modules: true,
+                        localIdentName: '[hash:base64:5]'
                       },
                     },
                     {
@@ -198,6 +200,7 @@ module.exports = {
                         ident: 'postcss',
                         plugins: () => [
                           require('postcss-flexbugs-fixes'),
+                          require('postcss-nested'),
                           autoprefixer({
                             browsers: [
                               '>1%',

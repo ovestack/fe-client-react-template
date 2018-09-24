@@ -1,3 +1,5 @@
-h1 {
-    font-size: 2em;
+.index {
+    h1 {
+        color: #f00;
+    }
 }

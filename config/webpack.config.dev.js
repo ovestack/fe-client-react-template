@@ -167,7 +167,9 @@ module.exports = {
               {
                 loader: require.resolve('css-loader'),
                 options: {
+                  modules: true,
                   importLoaders: 1,
+                  localIdentName: '[name]__[local]___[hash:base64:5]'
                 },
               },
               {
@@ -178,6 +180,7 @@ module.exports = {
                   ident: 'postcss',
                   plugins: () => [
                     require('postcss-flexbugs-fixes'),
+                    require('postcss-nested'),
                     autoprefixer({
                       browsers: [
                         '>1%',
