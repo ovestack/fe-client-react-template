@@ -10,10 +10,14 @@ import {
     combineReducers
 } from 'redux'
 import {
-    routerReducer
+    routerReducer,
+    routerMiddleware
 } from 'react-router-redux'
+import {
+    browserHistory
+} from 'react-router'
 
-const middleware = [thunkMiddleware]
+const middleware = [thunkMiddleware, routerMiddleware(browserHistory)]
 
 if (process.env.NODE_ENV === 'development') {
     middleware.push(createLogger())
@@ -25,7 +29,7 @@ export default function configureStore(initialState) {
             routing: routerReducer
         }, ...getReducers())),
         initialState,
-        applyMiddleware.apply(null,middleware)
+        applyMiddleware.apply(null, middleware)
     )
 
     // FIXME: add hot module reload for redux

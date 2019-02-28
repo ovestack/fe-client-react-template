@@ -7,15 +7,17 @@ import {
     browserHistory,
     Router
 } from 'react-router'
+import { syncHistoryWithStore } from 'react-router-redux'
 import './index.css'
 // import registerServiceWorker from './registerServiceWorker'
 import routes from './routes'
-import store from './redux'
+import configureStore from './redux'
 import './index.css'
 
+var store = configureStore(window.__INITIAL_STATE__ || {})
 ReactDOM.render(
-    <Provider store={store(window.__INITIAL_STATE__ || {})}>
-        <Router history={browserHistory} routes={routes} />
+    <Provider store={store}>
+        <Router history={syncHistoryWithStore(browserHistory, store)} routes={routes} />
     </Provider>,
     document.getElementById('root')
 )
