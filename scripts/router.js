@@ -82,13 +82,10 @@ function genRouterMap(dir, map, parent) {
                 subDescribe = true
             } catch (err) {}
             if (subDescribe) {
+                map._isSub = true
                 map.subRoutes = map.subRoutes || {}
                 map.subRoutes['/' + basename] = {}
                 genRouterMap(realPath, map.subRoutes['/' + basename], map.subRoutes)
-            } else if (basename === '@sub') {
-                map.subRoutes = {}
-                map.subRoutes._isSub = true
-                genRouterMap(realPath, map.subRoutes, map)
             } else {
                 var el = getCloseSub(map)
                 if (el) {
@@ -104,7 +101,7 @@ function genRouterMap(dir, map, parent) {
         } else {
             var extname = path.extname(realPath)
             if (!/\.(js|jsx)$/.test(extname)) return
-            var basename = path.basename(realPath).replace(extname, '')
+            basename = path.basename(realPath).replace(extname, '')
             if (basename === 'index') {
                 map.file = getComponentFile(realPath)
                 map.name = getComponentName(realPath)
@@ -112,6 +109,22 @@ function genRouterMap(dir, map, parent) {
                     name: map.name,
                     file: map.file
                 })
+            } else {
+                let parentSubNode = getCloseSub(map)
+                if (parentSubNode) {
+                    basename = (map._pwd + '/' + basename).replace(parentSubNode._pwd, '')
+                } else {
+                    basename = resolvePath(map._pwd + '/' + basename)
+                }
+                if (basename.endsWith('$')) {
+                    basename = basename.substr(0, basename.length - 1) + '?'
+                }
+                basename = basename.replace(/\$/g, ':')
+                parent[basename] = {
+                    file: getComponentFile(realPath),
+                    name: Camelize(basename.replace(/[$?]/g, ''))
+                }
+                parentSubNode = null
             }
         }
     })
